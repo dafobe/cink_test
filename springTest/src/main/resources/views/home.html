@@ -3,3 +3,13 @@
 </head>
 
 cink test HOME
+
+Provinces -->  ${provinces}
+
+<tr th:each="p : provinces">
+    <td th:value="${p}">1</td>
+</tr>
+<select>
+  <option th:each="p : ${provinces}" 
+              th:value="${p.provincia}" th:text="${p.provincia}">My option</option>
+</select>

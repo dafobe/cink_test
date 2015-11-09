@@ -23,11 +23,13 @@ public class ProvincesRESTController {
 	private TestServices testServices;
 	
 	public List<Province> findAll() {
+		System.out.println(" ============ provinces findAll");
 		return testServices.getProvinces();
 	}
 	
 	@RequestMapping(value="/{id}")
 	public List<City> findPostalCode(@PathVariable String id) {
+		System.out.println(" ============ provinces findPostalCode");
 		return testServices.getCitiesByPostalCode(id);
 	}
 }
