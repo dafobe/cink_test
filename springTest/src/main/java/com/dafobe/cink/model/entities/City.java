@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="municipios")
-public class Ciudad {
+public class City {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;

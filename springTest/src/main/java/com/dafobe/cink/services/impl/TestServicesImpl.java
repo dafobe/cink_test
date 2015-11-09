@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dafobe.cink.model.entities.Ciudad;
-import com.dafobe.cink.model.entities.Provincia;
-import com.dafobe.cink.model.repositories.CiudadesRepository;
-import com.dafobe.cink.model.repositories.ProvinciasRepository;
+import com.dafobe.cink.model.entities.City;
+import com.dafobe.cink.model.entities.Province;
+import com.dafobe.cink.model.repositories.CitiesRepository;
+import com.dafobe.cink.model.repositories.ProvincesRepository;
 import com.dafobe.cink.services.TestServices;
 
 @Service("testService")
@@ -18,32 +18,32 @@ public class TestServicesImpl implements TestServices {
 	private static Logger LOGGER = LoggerFactory.getLogger(TestServices.class);
 
 	@Autowired
-	ProvinciasRepository provinciasRepository;
+	ProvincesRepository provincesRepository;
 	
 	@Autowired
-	CiudadesRepository ciudadesRepository; 
+	CitiesRepository citiesRepository; 
 
 	@Override
-	public List<Provincia> getProvincias(){
-		LOGGER.info("getProvincias({})");
-		return provinciasRepository.findAll();
+	public List<Province> getProvinces(){
+		LOGGER.info("getProvinces({})");
+		return provincesRepository.findAll();
 	}
 	
 	@Override
-	public List<Ciudad> getCiudades(){
-		LOGGER.info("getMunicipios({})");
-		return ciudadesRepository.findAll();
+	public List<City> getCities(){
+		LOGGER.info("getCities({})");
+		return citiesRepository.findAll();
 	}
 	
 	@Override
-	public List<Ciudad> getCiudadesDeProvincia(String provinciaId){
-		LOGGER.info("getCiudadesDeProvincia({})", provinciaId);
-		return ciudadesRepository.findByCodprov(provinciaId);
+	public List<City> getProvinceCities(String id){
+		LOGGER.info("getCiudadesDeProvincia({})", id);
+		return citiesRepository.findByCodprov(id);
 	}
 	
 	@Override
-	public List<Ciudad> getCiudadesPorCodigoPostal(String codigoPostal){
-		LOGGER.info("getCiudadesPorCodigoPostal({})", codigoPostal);
-		return ciudadesRepository.findByCodpostal(codigoPostal);
+	public List<City> getCitiesByPostalCode(String id){
+		LOGGER.info("getCitiesByPostalCode({})", id);
+		return citiesRepository.findByCodpostal(id);
 	}
 }

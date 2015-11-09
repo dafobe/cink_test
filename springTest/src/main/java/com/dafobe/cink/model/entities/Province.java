@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="provincias")
-public class Provincia {
+public class Province {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private String code;

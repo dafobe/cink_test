@@ -2,17 +2,17 @@ package com.dafobe.cink.services;
 
 import java.util.List;
 
-import com.dafobe.cink.model.entities.Ciudad;
-import com.dafobe.cink.model.entities.Provincia;
+import com.dafobe.cink.model.entities.City;
+import com.dafobe.cink.model.entities.Province;
 
 public interface TestServices {
 
-	List<Provincia> getProvincias();
+	List<Province> getProvinces();
 
-	List<Ciudad> getCiudades();
+	List<City> getCities();
 
-	List<Ciudad> getCiudadesDeProvincia(String provinciaId);
+	List<City> getProvinceCities(String provinciaId);
 
-	List<Ciudad> getCiudadesPorCodigoPostal(String codigoPostal);
+	List<City> getCitiesByPostalCode(String codigoPostal);
 
 }

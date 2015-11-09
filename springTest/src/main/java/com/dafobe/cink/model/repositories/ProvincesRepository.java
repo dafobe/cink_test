@@ -1,13 +1,11 @@
 package com.dafobe.cink.model.repositories;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.dafobe.cink.model.entities.Provincia;
+import com.dafobe.cink.model.entities.Province;
 
 @Repository
-public interface ProvinciasRepository extends JpaRepository<Provincia, String> {
+public interface ProvincesRepository extends JpaRepository<Province, String> {
 
 }
