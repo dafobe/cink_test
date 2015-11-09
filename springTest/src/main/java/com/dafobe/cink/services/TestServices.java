@@ -13,4 +13,6 @@ public interface TestServices {
 
 	List<Ciudad> getCiudadesDeProvincia(String provinciaId);
 
+	List<Ciudad> getCiudadesPorCodigoPostal(String codigoPostal);
+
 }

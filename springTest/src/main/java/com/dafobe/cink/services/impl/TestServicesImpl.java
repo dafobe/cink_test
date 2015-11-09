@@ -13,7 +13,7 @@ import com.dafobe.cink.model.repositories.CiudadesRepository;
 import com.dafobe.cink.model.repositories.ProvinciasRepository;
 import com.dafobe.cink.services.TestServices;
 
-@Service
+@Service("testService")
 public class TestServicesImpl implements TestServices {
 	private static Logger LOGGER = LoggerFactory.getLogger(TestServices.class);
 
@@ -39,5 +39,11 @@ public class TestServicesImpl implements TestServices {
 	public List<Ciudad> getCiudadesDeProvincia(String provinciaId){
 		LOGGER.info("getCiudadesDeProvincia({})", provinciaId);
 		return ciudadesRepository.findByCodprov(provinciaId);
+	}
+	
+	@Override
+	public List<Ciudad> getCiudadesPorCodigoPostal(String codigoPostal){
+		LOGGER.info("getCiudadesPorCodigoPostal({})", codigoPostal);
+		return ciudadesRepository.findByCodpostal(codigoPostal);
 	}
 }
