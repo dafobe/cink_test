@@ -75,17 +75,30 @@
 			<artifactId>spring-mobile-device</artifactId>
 		</dependency>
     </dependencies>
-
     <build>
+    	<resources>
+		    <!--
+		     Added resource needed to load static resources in maven spring boot resources
+		     
+		     http://stackoverflow.com/questions/21358403/spring-boot-project-with-static-content-generates-404-when-running-jar
+		     http://forum.spring.io/forum/spring-projects/boot/747399-static-content-with-spring-boot
+		     
+		     https://maven.apache.org/pom.html#Resources
+		     -->
+	    	<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>resources</targetPath>
+			</resource>
+	    </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- <configuration>
+                <configuration>
                     <jvmArguments>
                         -agentpath:/home/adminuser/Documents/DFB/jrebel/lib/libjrebel64.so
                     </jvmArguments>
-                </configuration> -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
