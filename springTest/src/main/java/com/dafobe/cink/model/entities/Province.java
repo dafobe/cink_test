@@ -15,11 +15,12 @@ public class Province {
   private String code;
   @Column
   private String provincia;
-	public String getCodProv() {
+  
+	public String getCode() {
 		return code;
 	}
-	public void setCodProv(String codProv) {
-		this.code = codProv;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getProvincia() {
 		return provincia;
