@@ -5,6 +5,7 @@
   <groupId>com.dafobe</groupId>
   <artifactId>cink</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   
   <name>cinkTest</name>
 
@@ -85,10 +86,10 @@
 		     
 		     https://maven.apache.org/pom.html#Resources
 		     -->
-	    	<resource>
+	    	<!-- <resource>
 				<directory>src/main/resources</directory>
 				<targetPath>resources</targetPath>
-			</resource>
+			</resource> -->
 	    </resources>
         <plugins>
             <plugin>
