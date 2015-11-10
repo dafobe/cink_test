@@ -1,15 +1,110 @@
-<head>
-	<script src="js/vendors/dojo.js"></script>
-</head>
+<html>
+	<head>
+		<script src="js/vendors/dojo/dojo.js"
+		 		data-dojo-config="async: true, parseOnLoad: true"></script>
+		
+		<link rel="stylesheet" href="js/vendors/dijit/themes/claro/claro.css" />
+		<link rel="stylesheet" href="js/vendors/dojox/grid/enhanced/resources/claro/EnhancedGrid.css" />
+		<link rel="stylesheet" href="css/cink.css" />
+		
+	</head>
+	<script type="text/javascript">
+	
+	require(["dojo/parser",
+	         "dijit/form/FilteringSelect",
+	         "dojox/grid/EnhancedGrid",
+	         "dojox/grid/enhanced/plugins/Pagination",
+	         "dojo/store/Memory",
+	         "dojo/data/ObjectStore",
+	         "dojo/store/JsonRest"]);
+	
+	var cink = (function(win, undefined){
+		var select,
+			grid,
+			storeRest,
+			storeMemory
+			started = false;
+		return {
+			init: function(){
+				require(["dojo/ready"], function(ready){
+					ready(function(){
+						select = provinces;
+						grid = citiesGrid;
+						storeRest = citiesStoreRest;
+						storeMemory = citiesStoreMemory;
+						started = true;
+					});
+				});
+			},
+			updateGridStore : function(option){
+				if(!started){
+					console.error('Error during store initiation');
+					return;
+				}
+				if(!grid.store){
+					grid.setStore(storeMemory);
+				}
+				storeRest.get(option || select.value).then(function(results){
+						storeMemory.setData(results);
+						grid.render();
+				});
+			},
+			formatProvincia: function(value){
+				var lowerCase = value.toLowerCase();
+				return value?lowerCase.charAt(0).toUpperCase()+lowerCase.slice(1):value;
+			}
+		}
+	})(window);
+	
+	cink.init();
+	</script>
+	<header class="header-wrapper">
+		<span class="header-title">CINK TEST</span>
+		<span class="header-author">David Fonollosa</span>
+	</header>
+	
+	<span class="clear"></span>
+	
+	<section class="main claro">
+			<label class="label"> Selecciona una provincia</label>
+			<select data-dojo-type="dijit/form/FilteringSelect" 
+					data-dojo-id="provinces" id="provinces"
+					data-dojo-props="onChange:function(){
+											cink.updateGridStore(this.value);
+									}"
+					class="fullWidth">
+				<option value=""></option>
+			    <option th:each="p : ${provinces}" 
+			              th:value="${p.code}" th:text="${p.provincia}">My option</option>
+			</select>
+			
+			
+			<span class="clear clear-20"></span>
 
-cink test HOME
+			<span data-dojo-type="dojo/store/JsonRest" data-dojo-id="citiesStoreRest" id="citiesStoreRest" data-dojo-props="target:'/cities'"></span>
+			
+			<span data-dojo-type="dojo/store/Memory" data-dojo-id="citiesStoreMemory" id="citiesStoreMemory"></span>
+			
+			<span data-dojo-id="citiesStoreAdapter" id="citiesStoreAdapter" data-dojo-type="dojo.data.ObjectStore" 
+					data-dojo-props="objectStore:citiesStoreMemory"></span>
+			
+			<table data-dojo-id="citiesGrid" 
+					data-dojo-type="dojox.grid.EnhancedGrid"
+					data-dojo-props="store : citiesStoreAdapter,
+									 plugins: {
+								          	pagination: {
+								          	  defaultPageSize : 20,
+								          	  sizeSwitch : false
+								          	}
+								         }"
+				    autoHeight="true">
+			<thead>
+			    <tr>
+			    	<th field="codpostal" noresize="true" width="25%" cellClasses="alignTextLeft">Codigo Postal</th>
+					<th field="municipio" noresize="true" width="auto" formatter="cink.formatProvincia" cellClasses="alignTextLeft">Municipio</th>
+			    </tr>
+			</thead>
+		</table>
+	</section>
 
-Provinces -->  ${provinces}
-
-<tr th:each="p : provinces">
-    <td th:value="${p}">1</td>
-</tr>
-<select>
-  <option th:each="p : ${provinces}" 
-              th:value="${p.provincia}" th:text="${p.provincia}">My option</option>
-</select>
+</html>
