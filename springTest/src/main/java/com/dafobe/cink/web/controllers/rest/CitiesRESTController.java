@@ -1,5 +1,6 @@
 package com.dafobe.cink.web.controllers.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,7 +35,8 @@ public class CitiesRESTController {
 	
 	@RequestMapping()
 	public List<City> findAllCities() {
-		return testServices.getCities();
+		return new ArrayList<City>();
+//		return testServices.getCities();
 	}
 	
 	
